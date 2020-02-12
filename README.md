@@ -45,3 +45,11 @@ Nous allons vouloir faire certaines modifications à ce script, puisqu’il ne s
 
 
 Ce git sera mis à jour à mesure que les cours seront complétés, ce qui vous permettra de suivre avec les mêmes fichiers que moi, mais je recommande fortement de créer votre propre projet en même temps que je fais l’exemple lors du cours, comme ça vous pourrez faire toutes les étapes du début à la fin. N’hésitez pas à essayer de votre côté entre les séances pour avancer et découvrir Unity par vous-même! Je suggère que vous vous fassiez un second projet pour expérimenter et découvrir à votre vitesse. 
+
+---
+
+## Atelier Unity H20 #2
+Au programme:
+- Game design: brainstrom et choix des idées
+- Rigidbody et physique dans Unity
+- Mécanique d'un kart de base
