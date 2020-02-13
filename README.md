@@ -53,3 +53,16 @@ Au programme:
 - Game design: brainstrom et choix des idées
 - Rigidbody et physique dans Unity
 - Mécanique d'un kart de base
+
+
+#### Game design: brainstrom et choix des idées
+
+- les idées: obstancles, tracks, kart, caméra items, tous liés à un Core
+
+#### Rigidbody et physique dans Unity
+
+Rigidbody = composante, add l'obj dans la gestion physique
+
+#### Mécanique d'un kart de base
+
+Forward movement, selon si l'on touche au sol
