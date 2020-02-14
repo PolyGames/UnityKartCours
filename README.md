@@ -57,12 +57,28 @@ Au programme:
 
 #### Game design: brainstrom et choix des idées
 
-- les idées: obstancles, tracks, kart, caméra items, tous liés à un Core
+Puisque le jeu de Mario Kart contient plusieurs fonctionnalités, il va falloir se limiter afin de faire un prototype minimaliste qui représente l'idée globale du jeu. Lors du brainstorm, nous avons trouvé les concepts suivants: Track (piste ou pistes de courses), Kart (le bolide que le joueur utilisera), Obstacles (Il serait intéressant d'avoir des obstacles que l'on pourrait placer sur les pistes pour varier le jeu), Items (par exemple une banane que l'on peut lancer sur la piste), et la caméra (nous allons devoir créer une caméra qui puisse suivre le joueur et son bolide). 
+
+L'idée d'un brainstorm est de mettre en évidence quelles fonctionnalités sont les plus importantes, et lesquelles nous pourrions implémenter vers la fin du projet. J'ai également suggéré une base, c'est-à-dire de créer une classe de base qui s'occupera principalement de faire l'interface entre les différentes fonctionnalités suggérées. Nous pourrions également avoir un système d'événements dans cette classe centrale pour faciliter les interactions entre les différentes classes qui doivent interagir ensemble.
 
 #### Rigidbody et physique dans Unity
 
-Rigidbody = composante, add l'obj dans la gestion physique
+Unity contient un système de gestion de la physique et des collisions en trois dimensions très efficace. Pour s'en servir, il suffit d'ajouter la composante "Rigidbody" à l'objet que nous souhaitons faire tomber avec la gravité, ou encore que nous voulons modifier par des forces. Une fois que cette composante est ajoutée à notre cube, il faut s'assurer que le cube soit également muni d'un box collider, qui sera lui même utilisé par le système afin de vérifier les collisions. 
 
 #### Mécanique d'un kart de base
 
-Forward movement, selon si l'on touche au sol
+Notre cube peut présentement se déplacer de gauche à droite et de l'avant vers l'arrière. Afin d'obtenir un déplacement qui soit plus semblable à un kart, c'est-à-dire un déplacement qui ne peut être latéral que par une modification de l'angle, il faut faire quelques modifications au code. Nous avons ajouté, dans la méthode FixedUpdate, un appel à une méthode qui va gérer le mouvement sur l'axe frontal. Dans cette fonction, le but premier est de créer un déplacement lorsque l'on touche au sol (lorsque isGrounded est à true). Pour faire quelque chose de simple et d'intuitif, nous allons uniquement modifier la position du joueur pour donner l'impression d'un mouvement (je vous suggère d'apprendre et d'expérimenter par vous même pour remplacer cette manière de faire par une modification de l'attribut "velocity" de la composante Rigidbody). La classe du joueur contient une variable de type float qui représente la vitesse courante selon le vecteur frontal du bolide. Si le bolide touche au sol, il suffit d'incrémenter la vitesse selon une accélération. Nous allons également nous assurer de ralentir la vitesse afin de créer un certain freinage graduel, pour que le joueur ne puisse avancer que si l'accélérateur est enfoncé. Il faut s'assurer de prendre en note le vecteur frontal lorsque l'on touche au sol, afin de pouvoir l'utiliser lorsque nous sommes dans les airs et d'être capable de calculer la direction que doit prendre le kart.
+
+Certains problèmes sont encore à modifier dans ce code, par exemple si l'on se promène trop près du bord de la piste, il est possible de créer un mouvement de rotation autour du kart causé par un problème avec le vecteur frontal. Dans la majorité des cas, l'implémentation utilisée en ce moment fonctionne, mais ce serait un problème qui vaut la peine d'être réglé.
+
+Nous avons aussi ajouté une fonction qui est déclenchée lorsque le sol et le bolide entrent en contact afin de mettre la variable isGrounded à true, ainsi nous mettons les moteurs en marche que lorsque le joueur touche au sol.
+
+---
+
+## Atelier Unity H20 #3
+Au programme:
+- Mécanique d'un kart de base (suite)
+- Collisions avec le sol
+- Caméra subjective
+
+
