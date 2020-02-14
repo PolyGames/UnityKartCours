@@ -1,4 +1,4 @@
-# UnityKartCours
+# UnityKart - Cours Unity pour débutants par Poly Games
 
 ## Atelier Unity H20 #1
 Au programme:
