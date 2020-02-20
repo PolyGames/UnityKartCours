@@ -37,6 +37,15 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         ForwardMovement();
+        TurnMovement();
+    }
+
+    void TurnMovement()
+    {
+        if ((forwardSpeed > 0.1f || forwardSpeed < -0.1f) && isGrounded)
+        {
+            transform.Rotate(0, Mathf.Sign(forwardSpeed) * horizontalAxis * topTurnSpeed * Time.deltaTime, 0);
+        }
     }
 
     void ForwardMovement()
@@ -75,6 +84,22 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+        }
+    }
+    
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
         }
     }
 }
