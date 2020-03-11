@@ -81,4 +81,32 @@ Au programme:
 - Collisions avec le sol
 - Caméra subjective
 
+#### Mécanique d'un kart de base (suite)
+
+Suite au cours précédent, nous avions laissé de côté certains aspects du déplacement du kart. Lors du cours 3, nous avons ajouté un déplacement de rotation pour permettre au kart de tourner comme une voiture normale, au lieu de ne permettre que les déplacements sur l'axe frontal. La fonction de rotation, ajoutée dans le FixedUpdate, est simple. Si la vitesse du kart sur l'axe frontal est non nulle, et que le kart touche présentement au sol, alors il est possible de tourner, et ce, selon l'axe y, et avec une valeur que nous changeons par rapport à l'axe d'input horizontal. Nous multiplions également cette valeur par le signe de la vitesse dans l'axe frontal afin de déterminer le sens dans lequel le kart doit tourner, puisque ce sens doit être inversé lorsque nous sommes à reculon.
+
+#### Collisions avec le sol
+
+Dans la séance précédente, nous avons utilisé un booléen nommé isGrounded, qui était mis à true si le kart était en contact avec le sol, et false autrement. Il manquait quelques fonctions afin de compléter cette implémentation. Lorsque le joueur détecte une collision, et que le tag de l'autre objet est bien Ground, alors on peut déterminer la valeur que doit prendre isGrounded. Dans Unity, et dans le cadre de l'exemple, nous avons utilisé les trois fonctions, c'est-à-dire OnCollisionEnter, OnCollisionStay et OnCollisionExit. 
+
+Comme les noms l'indiquent, la première est utilisée lorsque l'on entre en collision, la seconde lorsque nous sommes présentement en état de contact continu, et la troisième lorsque l'on met fin à la collision. Notez cependant qu'il s'agit d'interruptions, et qu'il est possible qu'un nombre indéterminé d'interruptions aient lieu en même temps. Par exemple, si l'on voulait réduire le nombre de points de vie d'un objet dès que l'on entre en collision, et que l'on soustrait directement la valeur dans la fonction OnCollisionEnter sans vérification, alors il se pourrait que la soustraction se fasse plusieurs fois de suite. Il faut donc faire attention avec l'utilisation de ces fonctions. Bien entendu, nous n'avons pas besoin de la fonction OnCollisionStay dans le cadre de cet exemple, mais nous l'avons ajouté à titre indicatif.
+
+#### Caméra subjective
+
+Le code de la caméra subjective n'est pas très compliqué. L'idée principale est d'interpoler entre deux positions: la position actuelle, et la prochaine position à laquelle nous voulons que la caméra soit. On peut calculer la prochaine position à l'aide d'un offset obtenu par définition dans l'inspecteur (d'où le SerializeField), et avec le Transform de l'objet que nous souhaitons observer, également obtenu dans l'éditeur. 
+
+Dans le FixedUpdate, nous calculons la prochaine position, mais nous modifions également la position en y puisuqe l'on veut que celle-ci ne soit pas affectée par la rotation courante de l'objet observé. Par exemple, si le kart se trouve sur une rampe, le vecteur d'offset se retrouverait avec la même rotation que le kart, ce qui n'est pas voulu. L'application de la rotation sur l'offset est nécessaire puisqu'il faut pouvoir rester à l'arrière du kart. Ensuite, on utilise la fonction SmoothDamp de Vector3 avec nos positions, un vecteur passé par référence et un facteur d'interpolation. Le tout nous permettera d'obtenir un effet semblable à une caméra attachée avec un élastique au kart. Si le kart accélère, la caméra prendra un certain temps à obtenir la même vitesse, ce qui donne une impression d'accélération et qui permet de mieux voir lorsque le kart tourne. Ensuite nous modifions la rotation de la caméra afin de regarder dans la direction de l'objet observé.
+
+#### Materials
+
+Une autre modification pertinente à expliquer est la présence d'un matériel. Les matériaux dans Unity permettent de configurer l'aspect visuel d'une surface. On peut les utiliser pour donner une texture, une couleur, un aspect métallique ou mat, ou encore pour créer de la transparence. C'est avec les matériaux que l'on configure l'allure des objets. Puisque notre kart n'est qu'une boite, nous lui avons ajouté un matériel, que nous avons créé dans la fenêtre Projet, que nous avons ensuite modifié pour donner une couleur, et que nous avons ensuite appliqué sur le kart.
+
+
+---
+
+## Atelier Unity H20 #4
+Au programme:
+- Créer des objets au runtime
+- Déclencher des événements en code
+- Utiliser des Triggers comme checkpoints
 
